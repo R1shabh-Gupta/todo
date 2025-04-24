@@ -1,0 +1,131 @@
+/**
+* ConfirmationModal.css
+* 
+* A responsive, animated modal dialog with overlay that supports both light and dark modes.
+*/
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.2s ease-out;
+ }
+ 
+ .modal-content {
+    background-color: var(--color-background);
+    border-radius: 0.5rem;
+    padding: 1.5rem 2rem;
+    width: 90%;
+    max-width: 25rem;
+    box-shadow: 0 0.25rem 1rem var(--color-shadow-dark);
+    text-align: center;
+    animation: slideIn 0.3s ease-out;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+ }
+ 
+ .modal-content p {
+    margin: 0 0 1.25rem 0;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    line-height: 1.5;
+    transition: color 0.3s ease;
+ }
+ 
+ .modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+ }
+ 
+ .modal-actions button {
+    padding: 0.625rem 1.125rem;
+    border-radius: 0.375rem;
+    border: none;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+ }
+ 
+ .modal-actions button:first-child {
+    background-color: var(--color-surface-hover);
+    color: var(--color-text-secondary);
+ }
+ 
+ .modal-actions button:first-child:hover {
+    background-color: #e5e5e5;
+ }
+ 
+ .modal-actions button:last-child {
+    background-color: var(--color-primary);
+    color: white;
+ }
+ 
+ .modal-actions button:last-child:hover {
+    background-color: var(--color-primary-hover);
+ }
+ 
+ .modal-actions button:active {
+    transform: scale(0.98);
+ }
+ 
+ /* Dark Mode Styles */
+ body.dark-mode .modal-overlay {
+    background-color: rgba(0, 0, 0, 0.7);
+ }
+ 
+ body.dark-mode .modal-content {
+    background-color: var(--color-dark-surface);
+    box-shadow: 0 0.25rem 1rem var(--color-dark-shadow);
+ }
+ 
+ body.dark-mode .modal-content p {
+    color: var(--color-dark-text-primary);
+ }
+ 
+ body.dark-mode .modal-actions button:first-child {
+    background-color: var(--color-dark-surface-hover);
+    color: var(--color-dark-text-primary);
+ }
+ 
+ body.dark-mode .modal-actions button:first-child:hover {
+    background-color: #4b5563;
+ }
+ 
+ body.dark-mode .modal-actions button:last-child {
+    background-color: var(--color-dark-button-primary);
+ }
+ 
+ body.dark-mode .modal-actions button:last-child:hover {
+    background-color: var(--color-dark-button-primary-hover);
+ }
+ 
+ @keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+ 
+    to {
+        opacity: 1;
+    }
+ }
+ 
+ @keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-1.25rem);
+    }
+ 
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+ }

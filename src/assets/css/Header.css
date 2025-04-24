@@ -1,0 +1,74 @@
+/**
+* Header.css
+* 
+* Styles for the application header component with theme toggle functionality.
+* Includes both light and dark mode variants with smooth transitions.
+*/
+
+.header {
+    background-color: var(--color-background);
+    box-shadow: 0 0.125rem 0.25rem var(--color-shadow-light);
+    padding: 1rem 0;
+    border-bottom: 0.125rem solid var(--color-border);
+ }
+ 
+ .header.dark {
+    background-color: #0f141b;
+    border-bottom: 0.125rem solid #303030;
+ }
+ 
+ .header-container {
+    max-width: 75rem;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+ }
+ 
+ .logo h1 {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: var(--color-text-primary);
+    margin: 0;
+ }
+ 
+ .header.dark .logo h1 {
+    color: white;
+ }
+ 
+ .theme-toggle {
+    display: flex;
+    align-items: center;
+ }
+ 
+ .theme-button {
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    background: none;
+    color: var(--color-text-secondary);
+    border: 0.125rem solid var(--color-text-muted);
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ }
+ 
+ .header.dark .theme-button {
+    color: var(--color-dark-text-primary);
+    border-color: var(--color-dark-surface-hover);
+ }
+ 
+ .theme-button:hover {
+    background-color: var(--color-surface-hover);
+ }
+ 
+ .header.dark .theme-button:hover {
+    background-color: var(--color-dark-surface-hover);
+ }
+ 
+ .theme-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+ }

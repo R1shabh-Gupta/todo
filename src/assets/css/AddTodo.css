@@ -1,0 +1,133 @@
+/**
+* AddTodo.css
+*
+* Styles for the AddTodo component including responsive form elements and error states.
+* Features include input field with focus states, submit button with hover effects,
+* and comprehensive dark mode support across all elements.
+* Responsive design for mobile, tablet and desktop viewports.
+*/
+
+.add-todo-container {
+  margin: 1rem 0 2.5rem 0;
+ }
+ 
+ .add-todo {
+  display: flex;
+  justify-content: center;
+  z-index: 100;
+  border-radius: 0.5rem;
+ }
+ 
+ .add-todo input {
+  padding: 0.75rem 1rem;
+  width: 75%;
+  margin-right: 0.75rem;
+  border: 0.0625rem solid var(--color-border);
+  border-radius: 0.375rem;
+  font-size: 0.9375rem;
+  background-color: var(--color-surface);
+  outline: none;
+  transition: all 0.2s ease;
+ }
+ 
+ .add-todo input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 0.125rem var(--color-focus-ring);
+  background-color: var(--color-background);
+ }
+ 
+ .add-todo button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.125rem;
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+ }
+ 
+ .add-todo button:hover {
+  background-color: var(--color-primary-light);
+  box-shadow: 0 0.0625rem 0.1875rem var(--color-shadow-medium);
+ }
+ 
+ .add-todo button:active {
+  transform: translateY(0.0625rem);
+ }
+ 
+ .input-error {
+  color: var(--color-error);
+  font-size: 0.8125rem;
+  margin-top: 0.375rem;
+  margin-left: 0.125rem;
+  font-weight: 400;
+ }
+ 
+ /* Dark Mode Styles */
+ body.dark-mode .add-todo input {
+  background-color: var(--color-dark-background);
+  border-color: var(--color-dark-border);
+  color: var(--color-dark-text-primary);
+ }
+ 
+ body.dark-mode .add-todo input:focus {
+  border-color: var(--color-dark-text-focus);
+  box-shadow: 0 0 0 0.125rem var(--color-dark-focus-ring);
+  background-color: var(--color-dark-surface);
+ }
+ 
+ body.dark-mode .add-todo button {
+  background-color: var(--color-dark-button-primary);
+ }
+ 
+ body.dark-mode .add-todo button:hover {
+  background-color: var(--color-dark-button-primary-hover);
+  box-shadow: 0 0.0625rem 0.1875rem var(--color-dark-shadow);
+ }
+ 
+ body.dark-mode .input-error {
+  color: var(--color-dark-error);
+ }
+ 
+ @media (max-width: 768px) {
+  .add-todo {
+    padding: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+ 
+  .add-todo input {
+    width: 65%;
+    padding: 0.625rem 0.875rem;
+    font-size: 0.875rem;
+  }
+ 
+  .add-todo button {
+    padding: 0.625rem 0.875rem;
+    font-size: 0.875rem;
+  }
+ }
+ 
+ @media (max-width: 480px) {
+  .add-todo {
+    padding: 0.75rem 0.5rem;
+    margin-bottom: 1rem;
+  }
+ 
+  .add-todo input {
+    width: 70%;
+    margin-right: 0.5rem;
+  }
+ 
+  .add-todo button {
+    padding: 0.625rem 0.75rem;
+  }
+ 
+  .add-todo .add-icon {
+    margin-right: 0.25rem;
+  }
+ }

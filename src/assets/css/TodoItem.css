@@ -1,0 +1,250 @@
+/**
+* TodoItem.css
+*
+* This file contains the styles for individual todo items, including input fields,
+* task text, check icons, action buttons (delete and edit).
+* Now includes dark mode support.
+*/
+
+.todo-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: var(--color-background);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 0.0625rem solid var(--color-input-border);
+  box-shadow: 0 0.0625rem 0.1875rem var(--color-shadow-light);
+  transition: all 0.2s ease;
+}
+
+.todo-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.todo-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.todo-item input {
+  flex-grow: 1;
+  padding: 0.625rem 0.75rem;
+  font-size: 0.9375rem;
+  border: 0.0625rem solid var(--color-input-border);
+  border-radius: 0.375rem;
+  background-color: var(--color-surface);
+  margin: 0 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.todo-item input:focus {
+  outline: none;
+  border-color: var(--color-text-focus);
+  background-color: var(--color-background);
+  box-shadow: 0 0 0 0.125rem var(--color-focus-ring);
+}
+
+.todo-item input:hover {
+  border-color: var(--color-text-muted);
+}
+
+.task-text {
+  flex-grow: 1;
+  font-size: 1rem;
+  color: var(--color-text-primary);
+  margin-left: 0.625rem;
+  line-height: 1.4;
+  transition: all 0.2s ease;
+}
+
+.task-timestamps {
+  align-self: flex-start;
+  margin-top: 0.5rem;
+  font-size: 0.6875rem;
+  color: var(--color-text-muted);
+  display: flex;
+  gap: 0.5rem;
+}
+
+.task-timestamps small {
+  display: block;
+  font-size: 0.6875rem;
+}
+
+.check-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  opacity: 0.8;
+}
+
+.check-icon:hover {
+  opacity: 1;
+}
+
+.todo-item .task-text.completed {
+  text-decoration: line-through;
+  color: var(--color-text-muted);
+  opacity: 0.75;
+}
+
+@keyframes completeEffect {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.9;
+  }
+}
+
+.todo-item.completed {
+  background-color: var(--color-surface);
+  border-color: var(--color-input-border);
+  animation: completeEffect 0.3s ease-out forwards;
+}
+
+.action-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: all 0.2s ease;
+}
+
+.action-icon:hover {
+  opacity: 1;
+}
+
+.delete-icon:hover {
+  color: var(--color-error);
+}
+
+.edit-icon:hover {
+  color: var(--color-text-focus);
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body.dark-mode .todo-item {
+  background-color: var(--color-dark-surface);
+  border-color: var(--color-dark-border);
+}
+
+body.dark-mode .todo-item input {
+  background-color: var(--color-dark-background);
+  border-color: var(--color-dark-input-border);
+  color: var(--color-dark-text-primary);
+}
+
+body.dark-mode .todo-item input:focus {
+  border-color: var(--color-dark-text-focus);
+  background-color: var(--color-dark-surface);
+  box-shadow: 0 0 0 0.125rem var(--color-dark-focus-ring);
+}
+
+body.dark-mode .todo-item input:hover {
+  border-color: var(--color-dark-text-muted);
+}
+
+body.dark-mode .task-text {
+  color: var(--color-dark-text-primary);
+}
+
+body.dark-mode .task-timestamps {
+  color: var(--color-dark-text-secondary);
+}
+
+body.dark-mode .todo-item .task-text.completed {
+  color: var(--color-dark-text-muted);
+}
+
+body.dark-mode .todo-item.completed {
+  background-color: var(--color-dark-background);
+  border-color: var(--color-dark-surface);
+}
+
+@keyframes darkCompleteEffect {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
+
+body.dark-mode .todo-item.completed {
+  animation: darkCompleteEffect 0.3s ease-out forwards;
+}
+
+body.dark-mode .delete-icon:hover {
+  color: var(--color-dark-error);
+}
+
+body.dark-mode .edit-icon:hover {
+  color: var(--color-dark-success);
+}
+
+@media (max-width: 768px) {
+  .todo-item {
+    padding: 0.875rem;
+  }
+
+  .task-text {
+    font-size: 0.9375rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .todo-item {
+    padding: 0.75rem;
+  }
+
+  .todo-content {
+    flex-wrap: wrap;
+  }
+
+  .task-text {
+    font-size: 0.875rem;
+    width: calc(100% - 5rem);
+    margin-left: 0.5rem;
+  }
+
+  .todo-item input[type='text'] {
+    font-size: 0.875rem;
+    padding: 0.5rem 0.625rem;
+  }
+
+  .task-timestamps {
+    width: 100%;
+    margin-top: 0.375rem;
+    font-size: 0.625rem;
+  }
+  
+  .todo-actions {
+    margin-left: auto;
+  }
+  
+  .action-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+  
+  .check-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+}

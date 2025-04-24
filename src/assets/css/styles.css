@@ -1,0 +1,122 @@
+/**
+* styles.css
+*
+* This file contains the base styles for the To-do application, including body,
+* main container, title, and responsiveness for mobile devices.
+* Now includes dark mode support.
+*/
+
+.container {
+  max-width: 40.625rem;
+  min-width: 28vw;
+  margin: 2.5rem auto;
+  padding: 2rem;
+  background-color: var(--color-background);
+  border: 0.0625rem solid var(--color-border);
+  border-radius: 0.75rem;
+  box-shadow: 0 0.25rem 1rem var(--color-shadow-light);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+ }
+ 
+ .container:hover {
+  box-shadow: 0 0.375rem 1.125rem var(--color-shadow-medium);
+ }
+ 
+ .app-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--color-text-primary);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.03125rem;
+  transition: color 0.3s ease;
+ }
+ 
+ .filter-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+ }
+ 
+ .filter-buttons button {
+  padding: 0.75rem 1.125rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  background-color: var(--color-surface-hover);
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--color-text-secondary);
+ }
+ 
+ .filter-buttons .active {
+  color: white;
+  background-color: var(--color-primary);
+ }
+ 
+ button:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.125rem var(--color-focus-ring);
+ }
+ 
+ /* Dark mode styles */
+ body.dark-mode .container {
+  background-color: var(--color-dark-surface);
+  border-color: var(--color-dark-border);
+  box-shadow: 0 0.25rem 1rem var(--color-dark-shadow);
+ }
+ 
+ body.dark-mode .container:hover {
+  box-shadow: 0 0.375rem 1.125rem var(--color-dark-shadow);
+ }
+ 
+ body.dark-mode .app-title {
+  color: var(--color-dark-text-primary);
+ }
+ 
+ body.dark-mode .filter-buttons button {
+  background-color: var(--color-dark-surface-hover);
+  color: var(--color-dark-text-primary);
+ }
+ 
+ body.dark-mode .filter-buttons .active {
+  background-color: var(--color-dark-button-primary);
+  color: white;
+ }
+ 
+ body.dark-mode button:focus {
+  box-shadow: 0 0 0 0.125rem var(--color-dark-focus-ring);
+ }
+ 
+ /* Responsive styles */
+ @media (max-width: 768px) {
+  .container {
+    max-width: 90%;
+    padding: 1.5rem;
+    margin: 1.875rem auto;
+  }
+ }
+ 
+ @media (max-width: 480px) {
+  .container {
+    max-width: calc(100% - 2rem);
+    padding: 1.25rem;
+    margin: 1rem auto;
+    border-radius: 0.5rem;
+  }
+ 
+  .app-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .filter-buttons {
+    margin: 1rem 0;
+  }
+  
+  .filter-buttons button {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8125rem;
+  }
+ }
