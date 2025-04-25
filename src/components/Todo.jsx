@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import '../assets/css/styles.css';
+import { useNotification } from '../context/NotificationContext';
 import AddTodo from './AddTodo.jsx';
+import ConfirmationModal from './ConfirmationModal.jsx';
 import TodoList from './TodoList.jsx';
 
 /**
@@ -16,6 +18,8 @@ const Todo = () => {
   });
 
   const [filter, setFilter] = useState('All');
+  const [showClearAllModal, setShowClearAllModal] = useState(false);
+  const { addNotification } = useNotification();
 
   // Save tasks to localStorage whenever tasks change.
   useEffect(() => {
@@ -45,6 +49,36 @@ const Todo = () => {
    */
   const removeTodo = id => {
     setTodos(todos.filter(todo => todo.id !== id));
+  };
+
+  /**
+   * Clears all todos from the list.
+   * @returns {void}
+   */
+  const clearAllTodos = () => {
+    setTodos([]);
+    addNotification('All tasks have been deleted', 'error');
+    setShowClearAllModal(false);
+  };
+
+  /**
+   * Opens the confirmation modal for clearing all todos.
+   * @returns {void}
+   */
+  const handleClearAllClick = () => {
+    if (todos.length === 0) {
+      addNotification('No tasks to delete', 'warning');
+      return;
+    }
+    setShowClearAllModal(true);
+  };
+
+  /**
+   * Cancels the clear all operation and closes the modal.
+   * @returns {void}
+   */
+  const cancelClearAll = () => {
+    setShowClearAllModal(false);
   };
 
   /**
@@ -113,28 +147,29 @@ const Todo = () => {
       <h1 className="app-title">Todo</h1>
       <AddTodo addTodo={addTodo} />
 
-      {/* Filter Buttons */}
-      <div className="filter-buttons">
-        <button
-          onClick={() => setFilter('All')}
-          className={'All' === filter ? 'active' : ''}
-        >
-          All
-        </button>
+      <div className="todos-actions">
+        <div className="filter-buttons">
+          <button
+            onClick={() => setFilter('All')}
+            className={'All' === filter ? 'active' : ''}
+          >
+            All
+          </button>
 
-        <button
-          onClick={() => setFilter('Completed')}
-          className={'Completed' === filter ? 'active' : ''}
-        >
-          Completed
-        </button>
+          <button
+            onClick={() => setFilter('Completed')}
+            className={'Completed' === filter ? 'active' : ''}
+          >
+            Completed
+          </button>
 
-        <button
-          onClick={() => setFilter('Pending')}
-          className={'Pending' === filter ? 'active' : ''}
-        >
-          Pending
-        </button>
+          <button
+            onClick={() => setFilter('Pending')}
+            className={'Pending' === filter ? 'active' : ''}
+          >
+            Pending
+          </button>
+        </div>
       </div>
 
       <TodoList
@@ -144,6 +179,21 @@ const Todo = () => {
         editTodo={editTodo}
         editTodoListOrder={editTodoListOrder}
       />
+
+      <ConfirmationModal
+        isOpen={showClearAllModal}
+        message="Are you sure you want to delete all tasks? This action cannot be undone."
+        onConfirm={clearAllTodos}
+        onCancel={cancelClearAll}
+      />
+
+      <button
+        onClick={handleClearAllClick}
+        className="clear-all-button"
+        disabled={todos.length === 0}
+      >
+        Clear All
+      </button>
     </div>
   );
 };

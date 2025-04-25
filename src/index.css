@@ -9,7 +9,6 @@
   -moz-osx-font-smoothing: grayscale;
 
   /* Core colors */
-  /* Core colors */
   --color-primary: #3498D9;
   --color-primary-hover: #2980b9;
   --color-primary-light: #3497d9ed;
@@ -30,7 +29,7 @@
 
   /* Status colors */
   --color-success: #2ecc71;
-  --color-error: #e74c3c;
+  --color-error: #ef4444;
   --color-warning: #f39c12;
 
   /* Utility colors */
