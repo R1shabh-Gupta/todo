@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import '../assets/css/styles.css';
 import { useNotification } from '../context/NotificationContext';
 import AddTodo from './AddTodo.jsx';
@@ -12,18 +12,39 @@ import TodoList from './TodoList.jsx';
  */
 const Todo = () => {
   const [todos, setTodos] = useState(() => {
-    // Load tasks from localStorage on initial render.
-    const savedTodos = localStorage.getItem('todos');
-    return savedTodos ? JSON.parse(savedTodos) : [];
+    try {
+      // Load tasks from localStorage on initial render.
+      const savedTodos = localStorage.getItem('todos');
+      return savedTodos ? JSON.parse(savedTodos) : [];
+    } catch (error) {
+      console.error('Error loading todos from localStorage:', error);
+      return [];
+    }
   });
 
   const [filter, setFilter] = useState('All');
   const [showClearAllModal, setShowClearAllModal] = useState(false);
+
   const { addNotification } = useNotification();
 
   // Save tasks to localStorage whenever tasks change.
   useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos));
+    try {
+      localStorage.setItem('todos', JSON.stringify(todos));
+    } catch (error) {
+      if (
+        error instanceof DOMException &&
+        (error.name === 'QuotaExceededError' ||
+          error.name === 'NS_ERROR_DOM_QUOTA_REACHED')
+      ) {
+        console.error(
+          'Local storage quota exceeded when saving todos: ',
+          error
+        );
+      } else {
+        console.error('Failed to save todos to local storage: ', error);
+      }
+    }
   }, [todos]);
 
   /**
@@ -39,6 +60,7 @@ const Todo = () => {
       addedTime: new Date().toLocaleString(),
       modifiedTime: null,
     };
+
     setTodos([...todos, newTodo]);
   };
 
@@ -57,7 +79,9 @@ const Todo = () => {
    */
   const clearAllTodos = () => {
     setTodos([]);
+
     addNotification('All tasks have been deleted', 'error');
+
     setShowClearAllModal(false);
   };
 
@@ -70,6 +94,7 @@ const Todo = () => {
       addNotification('No tasks to delete', 'warning');
       return;
     }
+
     setShowClearAllModal(true);
   };
 
@@ -127,7 +152,7 @@ const Todo = () => {
    * Filters tasks based on the selected filter type (All, Completed, Pending).
    * @returns {Array} A filtered list of todos.
    */
-  const filterTasks = () => {
+  const filteredTodos = useMemo(() => {
     switch (filter) {
       case 'Completed':
         return todos.filter(todo => todo.completed);
@@ -136,7 +161,7 @@ const Todo = () => {
       default:
         return todos;
     }
-  };
+  }, [todos, filter]);
 
   /**
    * Renders the main container with AddTodo, filter buttons, and TodoList components.
@@ -173,7 +198,7 @@ const Todo = () => {
       </div>
 
       <TodoList
-        todos={filterTasks()}
+        todos={filteredTodos}
         removeTodo={removeTodo}
         toggleCompletion={toggleCompletion}
         editTodo={editTodo}

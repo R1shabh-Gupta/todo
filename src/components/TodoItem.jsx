@@ -5,6 +5,7 @@ import checkIcon from '../assets/images/check.svg';
 import closeIcon from '../assets/images/close.png';
 import deleteIcon from '../assets/images/delete.png';
 import editIcon from '../assets/images/edit.png';
+import saveIcon from '../assets/images/save.png';
 import { useNotification } from '../context/NotificationContext';
 import ConfirmationModal from './ConfirmationModal';
 
@@ -50,9 +51,11 @@ const TodoItem = ({ todo, toggleCompletion, removeTodo, editTodo }) => {
 
       if (isChanged) {
         editTodo(todo.id, newTask);
+
         addNotification('Task edited successfully!', 'success');
       }
     }
+
     setIsEditing(!isEditing);
   };
 
@@ -70,7 +73,9 @@ const TodoItem = ({ todo, toggleCompletion, removeTodo, editTodo }) => {
    */
   const confirmDelete = () => {
     removeTodo(todo.id);
+
     addNotification('Task deleted successfully!', 'error');
+
     setShowConfirmModal(false);
   };
 
@@ -89,9 +94,11 @@ const TodoItem = ({ todo, toggleCompletion, removeTodo, editTodo }) => {
    */
   const handleToggleCompletion = () => {
     toggleCompletion(todo.id);
+
     const message = todo.completed
       ? 'Task marked as incomplete!'
       : 'Task completed successfully!';
+
     addNotification(message, todo.completed ? 'warning' : 'success');
   };
 
@@ -113,8 +120,10 @@ const TodoItem = ({ todo, toggleCompletion, removeTodo, editTodo }) => {
 
       if (isChanged) {
         editTodo(todo.id, newTask);
+
         addNotification('Task edited successfully!', 'success');
       }
+
       setIsEditing(false);
     }
   };
@@ -168,12 +177,16 @@ const TodoItem = ({ todo, toggleCompletion, removeTodo, editTodo }) => {
               className="icon-button"
               onClick={handleEdit}
               aria-label={
-                isEditing && !isChanged ? 'Close editing' : 'Edit task'
+                isEditing
+                  ? isChanged
+                    ? 'Save changes'
+                    : 'Close editing'
+                  : 'Edit task'
               }
             >
               <img
-                src={isEditing && !isChanged ? closeIcon : editIcon}
-                alt={isEditing && !isChanged ? 'Close' : 'Edit'}
+                src={isEditing ? (isChanged ? saveIcon : closeIcon) : editIcon}
+                alt={isEditing ? (isChanged ? 'Save' : 'Close') : 'Edit'}
                 className="action-icon edit-icon"
               />
             </button>
@@ -194,6 +207,7 @@ const TodoItem = ({ todo, toggleCompletion, removeTodo, editTodo }) => {
           )}
         </div>
       </div>
+
       <ConfirmationModal
         isOpen={showConfirmModal}
         message="Are you sure you want to delete this task?"

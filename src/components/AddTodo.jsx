@@ -30,14 +30,17 @@ const AddTodo = ({ addTodo }) => {
         `Task cannot be longer than ${maxCharLimit} characters.`,
         'error'
       );
+
       setInputError(true);
       return;
     }
 
     if (task) {
       addTodo(task);
+
       addNotification('Task added successfully!', 'success');
       taskInputRef.current.value = '';
+
       setInputError(false);
     } else {
       addNotification('Please enter a task!', 'warning');
@@ -51,6 +54,7 @@ const AddTodo = ({ addTodo }) => {
    */
   const handleInputChange = () => {
     const task = taskInputRef.current.value;
+
     if (task.length > maxCharLimit) {
       setInputError(true);
     } else {
@@ -70,6 +74,7 @@ const AddTodo = ({ addTodo }) => {
 
         <button type="submit">Add</button>
       </form>
+
       {/* Display error message when input exceeds character limit */}
       {inputError && (
         <small className="input-error">

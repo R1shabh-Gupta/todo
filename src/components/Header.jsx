@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-
 import '../assets/css/Header.css';
 import moonIcon from '../assets/images/moon.svg';
 import sunIcon from '../assets/images/sun.svg';
